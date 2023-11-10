@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New University</title>
+</head>
+<body>
+    <form action="/universities" method="POST">
+        <div>
+            <label for="name">University Name:</label>
+            <input type="text" id="name" name="university[name]">
+        </div>
+        <div>
+            <label for="location">University Location:</label>
+            <input type="text" id="location" name="university[location]">
+        </div>
+        <button>Add University</button>
+    </form>
+    <a href="/universities">All Universities</a>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Universities</title>
+</head>
+<body>
+    <h1>Universities</h1>
+    <div>
+        <a href="/universities/new">Add University</a>
+    </div>
+    <ul>
+        <% for (let university of universities) {%>
+            <li><a href="/universities/<%= university._id %>"><%= university.name %></a></li>
+        <% } %>
+    </ul>
+    
+    <footer>        
+        <a href="/">Back to Homepage</a>
+    </footer>
+</body>
+</html>
