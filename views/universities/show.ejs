@@ -1,24 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>University</title>
-</head>
-<body>
-    <h1><%= university.name %></h1>
-    <h2><%= university.location %></h2>
-
-    <div>
-        <a href="/universities/<%= university._id %>/edit">Edit University</a>
+<% layout('layouts/boilerplate') %>
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card mb-5">
+            <img class="card-img-top" src="<%= university.image %>" alt="Card image cap">
+            <div class="card-body">
+                <h5 class="card-title text-bold"><%= university.name %></h5>
+                <p class="card-text"><%= university.description %></p>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item text-secondary"><%= university.location %></li>
+                <li class="list-group-item">In-State Tuition: $<%= university.ISTuition %></li>
+                <li class="list-group-item">Out-Of-State Tuition: $<%= university.OOSTuition %></li>
+            </ul>
+            <div class="card-body">
+                <a href="/universities/<%= university._id %>/edit" class="card-link btn btn-info">Edit University</a>
+                <form class="d-inline" action="/universities/<%= university._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
     </div>
-    <div>
-        <form action="/universities/<%= university._id %>?_method=DELETE" method="POST">
-            <button>Delete</button>
-        </form>
-    </div>
-    <div>        
-        <a href="/universities">All Universities</a>
-    </div>
-</body>
-</html>
+</div>

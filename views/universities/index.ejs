@@ -1,23 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Universities</title>
-</head>
-<body>
+<% layout('layouts/boilerplate') %>
     <h1>Universities</h1>
-    <div>
-        <a href="/universities/new">Add University</a>
-    </div>
-    <ul>
-        <% for (let university of universities) {%>
-            <li><a href="/universities/<%= university._id %>"><%= university.name %></a></li>
-        <% } %>
-    </ul>
-    
-    <footer>        
-        <a href="/">Back to Homepage</a>
-    </footer>
-</body>
-</html>
+    <% for (let university of universities) {%>
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <img src="<%= university.image %>" alt="" class="img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><%= university.name %></h5>
+                        <p class="card-text"><%= university.description %></p>
+                        <p class="card-text">
+                            <small class="text-secondary"><%= university.location %></small>
+                        </p>
+                        <a href="/universities/<%= university._id %>" class="btn btn-primary">View <%= university.name %></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <% } %>

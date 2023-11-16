@@ -3,6 +3,7 @@ const Schema = mongoose.Schema;
 
 const UniversitySchema = new Schema({
     name: String,
+    image: String,
     ISTuition: String,
     OOSTuition: String,
     description: String,

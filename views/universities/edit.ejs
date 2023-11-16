@@ -1,22 +1,54 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit University</title>
-</head>
-<body>
-    <form action="/universities/<%= university._id %>?_method=PUT" method="POST">
-        <div>
-            <label for="name">University Name:</label>
-            <input type="text" id="name" name="university[name]" value="<%= university.name %>">
-        </div>
-        <div>
-            <label for="location">University Location:</label>
-            <input type="text" id="location" name="university[location]" value="<%= university.location %>">
-        </div>
-        <button>Update University</button>
-    </form>
-    <a href="/universities/<%= university._id %>">Back to University</a>
-</body>
-</html>
+<% layout('layouts/boilerplate') %>
+<div class="row">
+    <h1 class="text-center">Edit University</h1>
+    <div class="col-6 offset-3">
+        <form action="/universities/<%= university._id %>?_method=PUT" method="POST">
+
+            <div class="mb-3">
+                <label class="form-label" for="name">University Name:</label>
+                <input class="form-control" type="text" id="name" name="university[name]" value="<%= university.name %>">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="location">University Location:</label>
+                <input class="form-control" type="text" id="location" name="university[location]" value="<%= university.location %>">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="ISTuition">In-State Tuition:</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="ISTuition-label">$</span>
+                    <input type="text" class="form-control" id="ISTuition" placeholder="0" aria-label="ISTuition" 
+                        aria-describedby="ISTuition-label" name="university[ISTuition]" value="<%= university.ISTuition %>">
+                    <span class="input-group-text">.00</span>
+                </div> 
+            </div>  
+
+            <div class="mb-3">
+                <label class="form-label" for="OOSTuition">Out-Of-State Tuition:</label>
+                <div class="input-group">
+                    <span class="input-group-text" id="OOSTuition-label">$</span>
+                    <input type="text" class="form-control" id="ISTuition" placeholder="0" aria-label="OOSTuition"
+                         aria-describedby="OOSTuition-label" name="university[OOSTuition]" value="<%= university.OOSTuition %>">
+                    <span class="input-group-text">.00</span>
+                </div> 
+            </div>  
+
+            <div class="mb-3">
+                <label class="form-label" for="image">Image URL:</label>
+                <input class="form-control" type="text" id="image" name="university[image]" value="<%= university.image %>">
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label" for="description">Description:</label>
+                <textarea class="form-control" type="text" id="description" name="university[description]">
+                    <%= university.description %>
+                </textarea>
+            </div>
+
+            <div class="mb-3">
+                <button class="btn btn-info">Update University</button>
+            </div>
+        </form>
+    </div>
+</div>
