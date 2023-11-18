@@ -2,16 +2,22 @@
 <div class="row">
     <h1 class="text-center">Edit University</h1>
     <div class="col-6 offset-3">
-        <form action="/universities/<%= university._id %>?_method=PUT" method="POST">
+        <form action="/universities/<%= university._id %>?_method=PUT" method="POST" novalidate class="needs-validation">
 
             <div class="mb-3">
                 <label class="form-label" for="name">University Name:</label>
-                <input class="form-control" type="text" id="name" name="university[name]" value="<%= university.name %>">
+                <input class="form-control" type="text" id="name" name="university[name]" value="<%= university.name %>" required>
+                <div class="invalid-feedback">
+                    Please provide the name.
+                </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="location">University Location:</label>
-                <input class="form-control" type="text" id="location" name="university[location]" value="<%= university.location %>">
+                <input class="form-control" type="text" id="location" name="university[location]" value="<%= university.location %>" required>
+                <div class="invalid-feedback">
+                    Please provide the location.
+                </div>
             </div>
 
             <div class="mb-3">
@@ -19,8 +25,11 @@
                 <div class="input-group">
                     <span class="input-group-text" id="ISTuition-label">$</span>
                     <input type="text" class="form-control" id="ISTuition" placeholder="0" aria-label="ISTuition" 
-                        aria-describedby="ISTuition-label" name="university[ISTuition]" value="<%= university.ISTuition %>">
+                        aria-describedby="ISTuition-label" name="university[ISTuition]" value="<%= university.ISTuition %>" required>
                     <span class="input-group-text">.00</span>
+                    <div class="invalid-feedback">
+                        Please provide the in-state tuition.
+                    </div>
                 </div> 
             </div>  
 
@@ -29,21 +38,30 @@
                 <div class="input-group">
                     <span class="input-group-text" id="OOSTuition-label">$</span>
                     <input type="text" class="form-control" id="ISTuition" placeholder="0" aria-label="OOSTuition"
-                         aria-describedby="OOSTuition-label" name="university[OOSTuition]" value="<%= university.OOSTuition %>">
+                         aria-describedby="OOSTuition-label" name="university[OOSTuition]" value="<%= university.OOSTuition %>" required>
                     <span class="input-group-text">.00</span>
+                    <div class="invalid-feedback">
+                        Please provide the out-of-state tuition.
+                    </div>
                 </div> 
             </div>  
 
             <div class="mb-3">
                 <label class="form-label" for="image">Image URL:</label>
-                <input class="form-control" type="text" id="image" name="university[image]" value="<%= university.image %>">
+                <input class="form-control" type="text" id="image" name="university[image]" value="<%= university.image %>" required>
+                <div class="invalid-feedback">
+                    Please provide an image URL.
+                </div>
             </div>
 
             <div class="mb-3">
                 <label class="form-label" for="description">Description:</label>
-                <textarea class="form-control" type="text" id="description" name="university[description]">
-                    <%= university.description %>
+                <textarea class="form-control" type="text" id="description" name="university[description]" required>
+                    <%= university.description %> 
                 </textarea>
+                <div class="invalid-feedback">
+                    Please provide a description.
+                </div>
             </div>
 
             <div class="mb-3">

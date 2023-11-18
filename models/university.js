@@ -4,8 +4,8 @@ const Schema = mongoose.Schema;
 const UniversitySchema = new Schema({
     name: String,
     image: String,
-    ISTuition: String,
-    OOSTuition: String,
+    ISTuition: Number,
+    OOSTuition: Number,
     description: String,
     location: String,
     public: String,
