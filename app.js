@@ -3,11 +3,13 @@ const path = require('path');
 const mongoose = require('mongoose');
 const ejsMate = require('ejs-mate');
 const Joi = require('joi');
-const { universitySchema } = require('./schemas.js')
+const { universitySchema, reviewSchema } = require('./schemas.js')
 const catchAsync = require('./utils/catchAsync');
 const ExpressError = require('./utils/ExpressError');
 const methodOverride = require('method-override');
 const University = require('./models/university');
+const Review = require('./models/review');
+const university = require('./models/university');
 
 mongoose.connect('mongodb://127.0.0.1:27017/yelpiversity')
 
@@ -34,7 +36,16 @@ const validateUniversity = (req, res, next) => {
     } else {
         next();
     }
+}
 
+const validateReview = (req, res, next) => {
+    const { error } = reviewSchema.validate(req.body);
+    if (error) {
+        const errorMsg = error.details.map(el => el.message).join(", ")
+        throw new ExpressError(errorMsg, 400)
+    } else {
+        next();
+    }
 }
 
 app.get('/', (req, res) => {
@@ -57,7 +68,7 @@ app.post('/universities', validateUniversity, catchAsync(async (req, res, next) 
 }));
 
 app.get('/universities/:id', catchAsync(async (req, res) => {
-    const university = await University.findById(req.params.id);
+    const university = await University.findById(req.params.id).populate('reviews');
     res.render('universities/show', { university });
 }));
 
@@ -72,11 +83,28 @@ app.put('/universities/:id', validateUniversity, catchAsync(async (req, res) => 
     res.redirect(`/universities/${university._id}`);
 }));
 
+
 app.delete('/universities/:id', catchAsync(async (req, res) => {
     const id = req.params.id;
     await University.findByIdAndDelete(id);
     res.redirect('/universities')
 }));
+
+app.post('/universities/:id/reviews', validateReview, catchAsync(async (req, res) => {
+    const university = await University.findById(req.params.id);
+    const review = new Review(req.body.review);
+    university.reviews.push(review);
+    await review.save();
+    await university.save();
+    res.redirect(`/universities/${university._id}`);
+}))
+
+app.delete('/universities/:id/reviews/:reviewId', catchAsync(async (req, res, next) => {
+    const { id, reviewId } = req.params;
+    await University.findByIdAndUpdate(id, { $pull: { reviews: reviewId } });
+    await Review.findByIdAndDelete(reviewId);
+    res.redirect(`/universities/${id}`);
+}))
 
 app.all('*', (req, res, next) => {
     next(new ExpressError('Not Found', 404))

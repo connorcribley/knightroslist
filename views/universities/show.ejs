@@ -1,7 +1,7 @@
 <% layout('layouts/boilerplate') %>
 <div class="row">
-    <div class="col-6 offset-3">
-        <div class="card mb-5">
+    <div class="col-6">
+        <div class="card mb-3">
             <img class="card-img-top" src="<%= university.image %>" alt="Card image cap">
             <div class="card-body">
                 <h5 class="card-title text-bold"><%= university.name %></h5>
@@ -19,5 +19,33 @@
                 </form>
             </div>
         </div>
+    </div>
+    <div class="col-6">
+        <h2>Leave a Review:</h2>
+        <form action="/universities/<%= university._id %>/reviews" method="POST" class="mb-3 needs-validation" novalidate>
+            <div class="mb-3">
+                <label class="form-label" for="rating">Rating</label>
+                <input class="form-range" type="range" min="1" max="5" name="review[rating]" id="rating">
+            </div>
+            <div class="mb-3">
+                <label class="form-label" for="body">Review:</label>
+                <textarea class="form-control" name="review[body]" id="body" cols="30" rows="3" required></textarea>
+                <div class="invalid-feedback">
+                    Review cannot be blank.
+                </div>
+            </div>
+            <button class="btn btn-success">Submit</button>
+        </form>
+        <% for (let review of university.reviews) {%>
+        <div class="card mb-3">
+            <div class="card-body">
+                <h5 class="card-title text-bold">Rating: <%= review.rating %></h5>
+                <p class="card-text"><%= review.body %></p>
+                <form action="<%= university._id %>/reviews/<%= review._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-sm btn-danger">Delete</button>
+                </form>
+            </div>
+        </div>
+        <% } %>
     </div>
 </div>
