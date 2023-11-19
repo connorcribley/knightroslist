@@ -2,73 +2,26 @@
 const express = require('express');
 const router = express.Router();
 
-//Models
-const University = require('../models/university');
-
-//Schemas
-const { universitySchema } = require('../schemas.js');
+//Controller
+const universities = require('../controllers/universities');
 
 //Middleware
 const catchAsync = require('../utils/catchAsync');
-const ExpressError = require('../utils/ExpressError');
-const { isLoggedIn } = require('../middleware');
-const validateUniversity = (req, res, next) => {
-    const { error } = universitySchema.validate(req.body);
-    if (error) {
-        const errorMsg = error.details.map(el => el.message).join(", ")
-        throw new ExpressError(errorMsg, 400)
-    } else {
-        next();
-    }
-}
+const { isLoggedIn, validateUniversity, verifyAuthor } = require('../middleware');
 
-router.get('/', catchAsync(async (req, res) => {
-    const universities = await University.find({});
-    res.render('universities/index', { universities });
-}));
+// Routes (can be found in /controllers/universities.js)
+router.get('/', catchAsync(universities.index));
 
-router.get('/new', isLoggedIn, (req, res) => {
-    res.render('universities/new');
-});
+router.get('/new', isLoggedIn, universities.renderNew);
 
-router.post('/', isLoggedIn, validateUniversity, catchAsync(async (req, res, next) => {
-    const university = new University(req.body.university);
-    await university.save();
-    req.flash('success', 'University has been added!');
-    res.redirect(`universities/${university._id}`);
-}));
+router.post('/', isLoggedIn, validateUniversity, catchAsync(universities.create));
 
-router.get('/:id', catchAsync(async (req, res) => {
-    const university = await University.findById(req.params.id).populate('reviews');
-    if (!university) {
-        req.flash('error', 'University was not found!')
-        return res.redirect('/universities')
-    }
-    res.render('universities/show', { university });
-}));
+router.get('/:id', catchAsync(universities.show));
 
-router.get('/:id/edit', isLoggedIn, catchAsync(async (req, res) => {
-    const university = await University.findById(req.params.id);
-    if (!university) {
-        req.flash('error', 'University was not found!')
-        return res.redirect('/universities')
-    }
-    res.render('universities/edit', { university });
-}));
+router.get('/:id/edit', isLoggedIn, verifyAuthor, catchAsync(universities.renderEdit));
 
-router.put('/:id', isLoggedIn, validateUniversity, catchAsync(async (req, res) => {
-    const id = req.params.id;
-    const university = await University.findByIdAndUpdate(id, { ...req.body.university })
-    req.flash('success', 'University has been updated!');
-    res.redirect(`/universities/${university._id}`);
-}));
+router.put('/:id', isLoggedIn, verifyAuthor, validateUniversity, catchAsync(universities.update));
 
-
-router.delete('/:id', isLoggedIn, catchAsync(async (req, res) => {
-    const id = req.params.id;
-    await University.findByIdAndDelete(id);
-    req.flash('success', 'University has been deleted!');
-    res.redirect('/universities')
-}));
+router.delete('/:id', isLoggedIn, catchAsync(universities.delete));
 
 module.exports = router;

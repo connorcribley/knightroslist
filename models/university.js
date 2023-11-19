@@ -11,6 +11,10 @@ const UniversitySchema = new Schema({
     location: String,
     public: String,
     accreditation: String,
+    author: {
+        type: Schema.Types.ObjectId,
+        ref: 'User'
+    },
     reviews: [
         {
             type: Schema.Types.ObjectId,
