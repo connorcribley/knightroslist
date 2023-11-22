@@ -1,6 +1,9 @@
 import React from "react";
+import Button from 'react-bootstrap/Button';
+import {Login} from './login'
 
 export const Navigation = (props) => {
+    //const navigate = useNavigate();
   return (
     <nav id="menu" className="navbar navbar-default navbar-fixed-top">
       <div className="container">
@@ -18,9 +21,11 @@ export const Navigation = (props) => {
             <span className="icon-bar"></span>{" "}
           </button>
           <a className="navbar-brand page-scroll" href="#page-top">
-            React Landing Page
+            The University Thing
           </a>{" "}
         </div>
+
+        
 
         <div
           className="collapse navbar-collapse"
@@ -28,9 +33,7 @@ export const Navigation = (props) => {
         >
           <ul className="nav navbar-nav navbar-right">
             <li>
-              <a href="#features" className="page-scroll">
-                Features
-              </a>
+                <input typer="search" placeholder="Search here"/>
             </li>
             <li>
               <a href="#about" className="page-scroll">
@@ -58,10 +61,13 @@ export const Navigation = (props) => {
               </a>
             </li>
             <li>
-              <a href="#contact" className="page-scroll">
-                Contact
+              <a href="Login" className="page-scroll">
+                Login
               </a>
             </li>
+            
+            {/*<Button href="login" variant="secondary">Login</Button>*/}
+            
           </ul>
         </div>
       </div>
