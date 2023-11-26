@@ -20,15 +20,15 @@ export const Navbar = (props) => {
     return (
         <nav className="navbar sticky-top navbar-expand-sm navbar-dark bg-dark">
             <div className="container-fluid">
-                <a className="navbar-brand" href="/">Yelpiversity</a>
+                <a className="navbar-brand" href="/">Knightro's List</a>
                 <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
                     aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
                 <div className="collapse navbar-collapse" id="navbarNavAltMarkup">
                     <div className="navbar-nav">
-                        <a className="nav-link" href="/universities">Universities</a>
-                        <a className="nav-link" href="/universities/new">New University</a>
+                        <a className="nav-link" href="/universities">Locations</a>
+                        <a className="nav-link" href="/universities/new">New Location</a>
                     </div>
                     <div className="navbar-nav ms-auto">
                         {!isLoggedIn ? (
