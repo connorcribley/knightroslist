@@ -68,7 +68,7 @@ const Edit = (props) => {
                                                         <label className="form-label" for="location">Location Type:</label>
                                                         <input className="form-control" type="text" id="location" name="university[location]" defaultValue={backendData.university.location} required />
                                                         <div className="invalid-feedback">
-                                                            Please provide the location.
+                                                            Please provide the location type .
                                                         </div>
                                                     </div>
 
