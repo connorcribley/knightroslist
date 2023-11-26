@@ -12,8 +12,8 @@ const Home = (props) => {
                 <main className="container mt-5">
 
                     <main className="text-center align-self-end">
-                        <h1 className="fw-bold">Welcome to Yelpiversity!</h1>
-                        <a href="/universities" className="btn btn-lg btn-secondary text-secondary fw-bold bg-white">Go to Universities</a>
+                        <h1 className="fw-bold">Welcome to Knightro's List!</h1>
+                        <a href="/universities" className="btn btn-lg btn-secondary text-secondary fw-bold bg-white">Check Out Popular Locations</a>
                     </main>
 
                 </main>
