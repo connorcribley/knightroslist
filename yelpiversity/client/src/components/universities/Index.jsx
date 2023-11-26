@@ -30,20 +30,20 @@ const Index = (props) => {
                         {(typeof backendData.universities === 'undefined') ? (
                             <p>Loading...</p>
                         ) : (
-                            backendData.universities.map((university, i) => (
+                            backendData.universities.map((location, i) => (
                                 <div key={i} className="card mb-3">
                                     <div key={i} className="row">
                                         <div key={i} className="col-md-4">
-                                            <img key={i} src={university.image} alt="" className="img-fluid" />
+                                            <img key={i} src={location.image} alt="" className="img-fluid" />
                                         </div>
                                         <div key={i} className="col-md-8">
                                             <div key={i} className="card-body">
-                                                <h5 key={i} className="card-title">{university.name}</h5>
-                                                <p key={i} className="card-text">{university.description}</p>
+                                                <h5 key={i} className="card-title">{location.name}</h5>
+                                                <p key={i} className="card-text">{location.description}</p>
                                                 <p key={i} className="card-text">
-                                                    <small key={i} className="text-secondary">{university.location}</small>
+                                                    <small key={i} className="text-secondary">{location.location}</small>
                                                 </p>
-                                                <a key={i} href={`/universities/${university._id}`} className="btn btn-primary">View {university.name}</a>
+                                                <a key={i} href={`/universities/${location._id}`} className="btn btn-primary">View {location.name}</a>
                                             </div>
                                         </div>
                                     </div>

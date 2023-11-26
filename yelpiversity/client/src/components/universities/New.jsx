@@ -29,83 +29,82 @@ const New = (props) => {
                     <main className="container mt-5">
 
                         <div className="row">
-                            <h1 className="text-center">New University</h1>
-                            <div className="col-6 offset-3">
-                                {!isLoggedIn ? (
-                                    <h4 className="text-center">You must <a href="/login">login</a> to create new universities!</h4>
+                        <h1 className="text-center">Edit Location</h1>
+                            {(typeof backendData.university === 'undefined') ? (
+                                <p>Loading...</p>
+                            ) : (
+                                (!isLoggedIn) ? (
+                                    <h4 className="text-center">You must <a href="/login">login</a> to edit a location.</h4>
                                 ) : (
-                                    <form action="/universities" method="POST" novalidate className="needs-validation">
-                                        <div className="mb-3">
-                                            <label className="form-label" for="name">University Name:</label>
-                                            <input className="form-control" type="text" id="name" name="university[name]" required />
-                                            <div className="invalid-feedback">
-                                                Please provide the name.
-                                            </div>
-                                        </div>
+                                    (typeof user === 'undefined' || user._id !== backendData.university.author._id) ? (
+                                        <h4 className="text-center">You cannot edit a location you did not create!</h4>
+                                    ) : (
+                                        <>
+                                            <div className="col-6 offset-3">
+                                                <form action={`/universities/${id}?_method=PUT`} method="POST" novalidate className="needs-validation">
 
-                                        <div className="mb-3">
-                                            <label className="form-label" for="location">University Location:</label>
-                                            <input className="form-control" type="text" id="location" name="university[location]" required />
-                                            <div className="invalid-feedback">
-                                                Please provide the location.
-                                            </div>
-                                        </div>
+                                                    <div className="mb-3">
+                                                        <label className="form-label" for="name">Location Name:</label>
+                                                        <input className="form-control" type="text" id="name" name="university[name]" defaultValue={backendData.university.name} required />
+                                                        <div className="invalid-feedback">
+                                                            Please provide the name.
+                                                        </div>
+                                                    </div>
 
-                                        <div className="mb-3">
-                                            <label className="form-label" for="ISTuition">In-State Tuition:</label>
-                                            <div className="input-group">
-                                                <span className="input-group-text" id="ISTuition-label">$</span>
-                                                <input type="text" className="form-control" id="ISTuition" placeholder="0" aria-label="ISTuition" aria-describedby="ISTuition-label" name="university[ISTuition]" required />
-                                                <span className="input-group-text">.00</span>
-                                                <div className="invalid-feedback">
-                                                    Please provide the in-state tuition.
-                                                </div>
-                                            </div>
-                                        </div>
+                                                    <div className="mb-3">
+                                                        <label className="form-label" for="location">Location Type:</label>
+                                                        <input className="form-control" type="text" id="location" name="university[location]" defaultValue={backendData.university.location} required />
+                                                        <div className="invalid-feedback">
+                                                            Please provide the location.
+                                                        </div>
+                                                    </div>
 
-                                        <div className="mb-3">
-                                            <label className="form-label" for="OOSTuition">Out-Of-State Tuition:</label>
-                                            <div className="input-group">
-                                                <span className="input-group-text" id="OOSTuition-label">$</span>
-                                                <input type="text" className="form-control" id="ISTuition" placeholder="0" aria-label="OOSTuition" aria-describedby="OOSTuition-label" name="university[OOSTuition]" required />
-                                                <span className="input-group-text">.00</span>
-                                                <div className="invalid-feedback">
-                                                    Please provide the out-of-state tuition.
-                                                </div>
-                                            </div>
-                                        </div>
+                                                    {/* <div className="mb-3">
+                                                        <label className="form-label" for="ISTuition">:</label>
+                                                        <div className="input-group">
+                                                            <span className="input-group-text" id="ISTuition-label">$</span>
+                                                            <input type="text" className="form-control" id="ISTuition" placeholder="0" aria-label="ISTuition"
+                                                                aria-describedby="ISTuition-label" name="university[ISTuition]" defaultValue={backendData.university.ISTuition} required />
+                                                            <span className="input-group-text">.00</span>
+                                                            <div className="invalid-feedback">
+                                                                Please provide the in-state tuition.
+                                                            </div>
+                                                        </div>
+                                                    </div> */}
 
-                                        <div className="mb-3">
-                                            <label className="form-label" for="image">Image URL:</label>
-                                            <input className="form-control" type="text" id="image" name="university[image]" required />
-                                            <div className="invalid-feedback">
-                                                Please provide an image URL.
-                                            </div>
-                                        </div>
+                                                    <div className="mb-3">
+                                                        <label className="form-label" for="image">Image URL:</label>
+                                                        <input className="form-control" type="text" id="image" name="university[image]" defaultValue={backendData.university.image} required />
+                                                        <div className="invalid-feedback">
+                                                            Please provide an image URL.
+                                                        </div>
+                                                    </div>
 
-                                        <div className="mb-3">
-                                            <label className="form-label" for="description">Description:</label>
-                                            <textarea className="form-control" type="text" id="description" name="university[description]" required></textarea>
-                                            <div className="invalid-feedback">
-                                                Please provide a description.
-                                            </div>
-                                        </div>
+                                                    <div className="mb-3">
+                                                        <label className="form-label" for="description">Description:</label>
+                                                        <textarea className="form-control" type="text" id="description" name="university[description]" required>
+                                                            {backendData.university.description}
+                                                        </textarea>
+                                                        <div className="invalid-feedback">
+                                                            Please provide a description.
+                                                        </div>
+                                                    </div>
 
-                                        <div className="mb-3">
-                                            <button className="btn btn-success">Add University</button>
-                                        </div>
-                                    </form>
-                                )}
-                            </div>
+                                                    <div className="mb-3">
+                                                        <button className="btn btn-info">Update Location</button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </>
+                                    )
+                                )
+                            )}
                         </div>
 
                     </main>
                     <Footer />
                 </body>
             </html>
-
-
-
 
         </>
     );
