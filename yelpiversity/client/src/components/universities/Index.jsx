@@ -26,7 +26,7 @@ const Index = (props) => {
                     <Navbar />
                     <main className="container mt-5">
 
-                        <h1>Universities</h1>
+                        <h1>Popular Locations on Campus</h1>
                         {(typeof backendData.universities === 'undefined') ? (
                             <p>Loading...</p>
                         ) : (
