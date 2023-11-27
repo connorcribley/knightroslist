@@ -47,7 +47,7 @@ const Edit = (props) => {
                                 <p>Loading...</p>
                             ) : (
                                 (!isLoggedIn) ? (
-                                    <h4 className="text-center">You must <a href="/login">login</a> to edit a university.</h4>
+                                    <h4 className="text-center">You must <a href="/login">login</a> to edit a location.</h4>
                                 ) : (
                                     (typeof user === 'undefined' || user._id !== backendData.university.author._id) ? (
                                         <h4 className="text-center">You cannot edit a location you did not create!</h4>

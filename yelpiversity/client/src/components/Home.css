@@ -1,0 +1,9 @@
+.intro {
+  
+    background: url(ucf2.jpg) center center no-repeat;
+    background-color:   hsl(0, 72%, 48%);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+  }
