@@ -3,6 +3,7 @@ import Home from "./components/Home";
 import Error from "./components/Error";
 import Login from "./components/users/Login"
 import Register from "./components/users/Register"
+import Logout from "./components/users/Logout";
 import Index from "./components/universities/Index";
 import Show from "./components/universities/Show";
 import New from "./components/universities/New";
@@ -23,6 +24,11 @@ const router = createBrowserRouter ([
     {
         path:"register",
         element: <Register/>
+    },
+    {
+        path:"logout",
+        element: <Logout/>,
+        errorElement: <Error/>
     },
     {
         path:"universities",
