@@ -20,7 +20,7 @@ const universityRoutes = require('./routes/universities')
 const reviewRoutes = require('./routes/reviews')
 
 //Connect to MongoDB via Mongoose
-mongoose.connect('mongodb://admin:cebd3ddacba44d1cf6e0fe1b4267e62b96b1f1f0b92e4f47@127.0.0.1:27017')
+mongoose.connect('mongodb://127.0.0.1:27017/')
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
